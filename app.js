@@ -81,6 +81,16 @@ app.put("/cards/:id", (req, res) => {
     }
 });
 
+// app.delete("/cards/:id", (req, res) => {
+//     const idCard = Number(req.params.id);
+//     try {
+//         fs.readFile(cardPath, "utf-8", (err, data) => {
+//             const jsonCards = JSON.parse(data);
+
+//         })
+//     }
+// });
+
 // app.post('/getToken', (req, res) => {
 //     const { username, password } = req.body;
 
@@ -103,15 +113,6 @@ app.put("/cards/:id", (req, res) => {
 //         res.json({ token });
 //     });
 // });
-
-// app.delete();
-
-
-
-
-
-
-
 
 
 // Start the server
