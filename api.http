@@ -2,7 +2,14 @@ GET http://localhost:3000/cards
 # gets and filters the card
 ####
 
-POST http://localhost:3000/cards/create
+POST http://localhost:3000/cards/create HTTP/1.1
+content-type: application/json
+
+{
+    "id": 155,
+    "name": "vape God"
+}
+
 # This will create a new card
 ####
 

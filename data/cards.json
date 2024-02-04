@@ -1269,6 +1269,10 @@
       "type": "Spell",
       "rarity": "Common",
       "cost": 2
+    },
+    {
+      "id": 155,
+      "name": "vape God"
     }
   ]
 }

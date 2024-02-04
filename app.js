@@ -2,9 +2,11 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const app = express();
+const path = require('path');
 
 const cards = require('./data/cards.json');
-
+const cardPath = path.join(__dirname, "data/cards.json");
+let id;
 app.use(express.json());
 
 
@@ -23,7 +25,32 @@ app.get('/cards', (req, res) => {
     res.json(matchingCards)
 });
 
-// app.post();
+//Creating Cards -- Still Need Error Handling & Dups
+app.post('/cards/create', (req, res) => {
+    fs.readFile(cardPath, "utf8", (err, data) => {
+       // Error Handling added later
+        if (err) res.send("error reading file", err);
+        try {
+            console.log(req.body);
+            let newCard;
+            const jsonCards = JSON.parse(data);
+            id = req.body.id ? req.body.id : 1;
+
+        newCard = { ...req.body, id: id };
+        jsonCards.cards.splice(id -1, 0, newCard);
+
+        fs.writeFile(cardPath, JSON.stringify(jsonCards, null, 2), (err) => {
+            if (err) console.error("error writing file", err);
+        });
+
+        let succesDeck = `Your Card was added to the deck: ${JSON.stringify(newCard)}`
+        res.send(succesDeck);
+
+        } catch (parseErr) {
+            res.status(404).send("Error parsing JSON Data");
+        }
+    })
+});
 
 // app.post('/getToken', (req, res) => {
 //     const { username, password } = req.body;
