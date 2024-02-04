@@ -81,15 +81,34 @@ app.put("/cards/:id", (req, res) => {
     }
 });
 
-// app.delete("/cards/:id", (req, res) => {
-//     const idCard = Number(req.params.id);
-//     try {
-//         fs.readFile(cardPath, "utf-8", (err, data) => {
-//             const jsonCards = JSON.parse(data);
-
-//         })
-//     }
-// });
+app.delete("/cards/:id", (req, res) => {
+    const idCard = Number(req.params.id);
+    try {
+        fs.readFile(cardPath, "utf-8", (err, data) => {
+            const jsonCards = JSON.parse(data);
+            if (!jsonCards.cards) {
+                res.status(404).send("card not found");
+            }
+            let currentCardList = jsonCards.cards.findIndex(({ id }) => id === idCard);
+            let currentCard = jsonCards.cards.find(({ id }) => id === cardId);
+            if (currentCard) {
+                jsonCards.cards.splice(currentCardList, 1);
+                fs.writeFile(
+                    cardPath,
+                    JSON.stringify(jsonCards, null, 2),
+                    (err) => {
+                        if (err) res.status(err).send("error writing file");
+                    }
+                );
+            res.send(`deleted card: ${JSON.stringify(currentCard)}`);
+            } else {
+            res.send("card not found");
+            }
+        });
+    } catch (parseErr) {
+        res.status(404).send("Error parsing JSON data", parseErr);
+    }
+});
 
 // app.post('/getToken', (req, res) => {
 //     const { username, password } = req.body;
