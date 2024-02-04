@@ -21,6 +21,17 @@ PUT http://localhost:3000/cards/:id
 # edits cards
 ####
 
+PUT http://localhost:3000/cards/155 HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Vape Lord",
+    "Cost": 200
+}
+
+# edits cards
+####
+
 DELETE http://localhost:3000/cards/:id
 # deletes cards
 ####

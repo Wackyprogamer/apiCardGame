@@ -47,9 +47,38 @@ app.post('/cards/create', (req, res) => {
         res.send(succesDeck);
 
         } catch (parseErr) {
-            res.status(404).send("Error parsing JSON Data");
+            res.status(404).send("Error parsing JSON Data", parseErr);
         }
     })
+});
+
+
+//Edit Card Enpoint -- Edits Card
+app.put("/cards/:id", (req, res) => {
+    const idCard = Number(req.params.id);
+    const userChanged = req.body;
+    const listedChanges = Object.keys(req.body);
+
+    try {
+        fs.readFile(cardPath, "utf-8", (err, data) => {
+            const jsonCards = JSON.parse(data);
+            if (!jsonCards.cards) {
+                res.status(404).send("card not found");
+            }
+            let currentCard = jsonCards.cards.find(({ id }) => id === idCard);
+            listedChanges.forEach((change) => {
+                currentCard[change] = userChanged[change];
+            });
+            fs.writeFile(cardPath, JSON.stringify(jsonCards, null, 2), (err) => {
+                if (err) console.error("error writing file", err);
+            });
+            res.send(
+                `card has been editied. Updated card: \n${JSON.stringify(currentCard)}`
+            );
+        });
+    } catch (parseErr) {
+        res.status(404).send("Error parsing JSON Data", parseErr);
+    }
 });
 
 // app.post('/getToken', (req, res) => {
@@ -83,7 +112,7 @@ app.post('/cards/create', (req, res) => {
 
 
 
-// app.put();
+
 
 // Start the server
 app.listen(3000, (req, res) => {
