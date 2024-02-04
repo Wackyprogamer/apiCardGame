@@ -2,7 +2,28 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const app = express();
+
+const cards = require('./data/cards.json');
+
 app.use(express.json());
+
+
+// Search function & endpoint
+app.get('/cards', (req, res) => {
+    let matchingCards = cards.cards;
+
+    const searchCards = function (req, cards, activeSearch) {
+        console.log('shalom');
+    }
+
+    Object.keys(req.query).forEach((activeSearch) => {
+        matchingCards = searchCards(req, matchingCards, activeSearch);
+    });
+
+    res.json(matchingCards)
+});
+
+// app.post();
 
 // app.post('/getToken', (req, res) => {
 //     const { username, password } = req.body;
@@ -27,26 +48,15 @@ app.use(express.json());
 //     });
 // });
 
-app.delete();
+// app.delete();
 
 
-// Search function & endpoint
-// app.get('/cards', (req, res) => {
-//     let matchingCards = matchCards.cards;
 
-//     const searchCards = funciton (req, matchingCards, activeSearch) {
-        
-//     }
 
-//     Object.keys(req.query).forEach((activeSearch) => {
-//         matchingCards = searchCards(req, matchingCards, activeSearch);
-//     });
-//     res.json(matchingCards)
-// });
 
-app.post();
 
-app.put();
+
+// app.put();
 
 // Start the server
 app.listen(3000, (req, res) => {
