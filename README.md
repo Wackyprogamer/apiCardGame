@@ -19,15 +19,15 @@ Implement a `/getToken` endpoint that:
 
 Implement a `/cards` endpoint supporting the following functionalities:
 
-- Retrieve all cards with optional query parameters for filtering (8 points).
+- Retrieve all cards with optional query parameters for filtering (8 points). **Done**
   - Filtering supports equality matches.
   - Example: `http://localhost:3000/cards?set=Base%20Set&type=Creature&rarity=Common`
-- Create a new card at the `/cards/create` endpoint (8 points).
+- Create a new card at the `/cards/create` endpoint (8 points).   **Done**
   - Creates a new card using information from the request body.
-  - Ensures cardIds are unique.
-- Update an existing card using the `/cards/:id` (PUT) endpoint (7 points).
-  - Updates a card using information from the request body and the id in the request params.
-  - Ensures cardIds are unique.
+  - Ensures cardIds are unique. *Not DONE*
+- Update an existing card using the `/cards/:id` (PUT) endpoint (7 points).**Done**
+  - Updates a card using information from the request body and the id in the request params.**Done**
+  - Ensures cardIds are unique.*Kidna*
 - Delete an existing card using the `/cards/:id` (DELETE) endpoint (7 points).
   - Deletes a card using the id in the request params.
   - Create, update, and delete endpoints are protected; accessible only with a valid JWT.
@@ -35,7 +35,7 @@ Implement a `/cards` endpoint supporting the following functionalities:
 
 ### File Operations (10 points)
 
-Utilize file operations for reading and writing card data to a JSON file:
+Utilize file operations for reading and writing card data to a JSON file:**Done**
 
 - Ensures file operations do not compromise data integrity and correctly persist data.
 
@@ -51,7 +51,7 @@ Implement middleware to validate incoming JWT tokens for protected routes:
 Implement error handling middleware that:
 
 - Returns a 401 status code for invalid tokens.
-- Returns a 500 status code for other errors.
+- Returns a 500 status code for other errors. **Done**
 - Includes descriptive error messages in all cases.
 
 ### Additional Features (Optional - up to 10 points)
