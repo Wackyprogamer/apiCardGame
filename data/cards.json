@@ -1269,11 +1269,6 @@
       "type": "Spell",
       "rarity": "Common",
       "cost": 2
-    },
-    {
-      "id": 155,
-      "name": "Vape Lord",
-      "Cost": 200
     }
   ]
 }

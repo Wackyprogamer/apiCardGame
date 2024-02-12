@@ -11,19 +11,47 @@ app.use(express.json());
 
 
 // Search function & endpoint
+// app.get('/cards', (req, res) => {
+//     let matchingCards = cards.cards;
+
+//     const searchCards = function (req, cards, activeSearch) {
+//         console.log('shalom');
+//     }
+
+//     Object.keys(req.query).forEach((activeSearch) => {
+//         matchingCards = searchCards(req, matchingCards, activeSearch);
+//     });
+
+//     res.json(matchingCards)
+// });
+
+
+
 app.get('/cards', (req, res) => {
     let matchingCards = cards.cards;
 
-    const searchCards = function (req, cards, activeSearch) {
-        console.log('shalom');
-    }
+    const searchCards = (req, cards, activeSearch) => {
+        const searchTerm = req.query[activeSearch];
+        
+        if (searchTerm) {
+            // Filter cards based on the name (case-insensitive)
+            matchingCards = matchingCards.filter(card => {
+                const value = card[activeSearch];
+                return value !== undefined && value.toString().toLowerCase() === searchTerm.toLowerCase();
+            });
+        }
 
-    Object.keys(req.query).forEach((activeSearch) => {
+        return matchingCards;
+    };
+
+    Object.keys(req.query).forEach(activeSearch => {
         matchingCards = searchCards(req, matchingCards, activeSearch);
     });
 
-    res.json(matchingCards)
+    res.json(matchingCards);
+    
 });
+
 
 //Creating Cards -- Still Need Error Handling & Dups
 app.post('/cards/create', (req, res) => {
@@ -90,7 +118,7 @@ app.delete("/cards/:id", (req, res) => {
                 res.status(404).send("card not found");
             }
             let currentCardList = jsonCards.cards.findIndex(({ id }) => id === idCard);
-            let currentCard = jsonCards.cards.find(({ id }) => id === cardId);
+            let currentCard = jsonCards.cards.find(({ id }) => id === idCard);
             if (currentCard) {
                 jsonCards.cards.splice(currentCardList, 1);
                 fs.writeFile(
@@ -134,7 +162,9 @@ app.delete("/cards/:id", (req, res) => {
 // });
 
 
+
 // Start the server
 app.listen(3000, (req, res) => {
     console.log(`Server running on port ${3000}`)
 });
+
