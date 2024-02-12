@@ -12,8 +12,9 @@ POST http://localhost:3000/cards/create HTTP/1.1
 content-type: application/json
 
 {
-    "id": 155,
-    "name": "vape God"
+    "id": 156,
+    "name": "Sergio Castillo",
+    "Cost": 200
 }
 
 # This will create a new card
@@ -31,14 +32,14 @@ PUT http://localhost:3000/cards/155 HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Vape Lord",
+    "name": "Sergio Castillo",
     "Cost": 200
 }
 
 # edits cards
 ####
 
-DELETE http://localhost:3000/cards/155
+DELETE http://localhost:3000/cards/156
 
 # deletes cards
 ####

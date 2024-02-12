@@ -23,8 +23,8 @@ Implement a `/cards` endpoint supporting the following functionalities:
   - Filtering supports equality matches.
   - Example: `http://localhost:3000/cards?set=Base%20Set&type=Creature&rarity=Common`
 - Create a new card at the `/cards/create` endpoint (8 points).   **Done**
-  - Creates a new card using information from the request body.
-  - Ensures cardIds are unique. *Not DONE*
+  - Creates a new card using information from the request body.  **Done**
+  - Ensures cardIds are unique. *Not DONE* 
 - Update an existing card using the `/cards/:id` (PUT) endpoint (7 points).**Done**
   - Updates a card using information from the request body and the id in the request params.**Done**
   - Ensures cardIds are unique.*Kidna*

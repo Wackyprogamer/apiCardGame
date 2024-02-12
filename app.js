@@ -11,28 +11,12 @@ app.use(express.json());
 
 
 // Search function & endpoint
-// app.get('/cards', (req, res) => {
-//     let matchingCards = cards.cards;
-
-//     const searchCards = function (req, cards, activeSearch) {
-//         console.log('shalom');
-//     }
-
-//     Object.keys(req.query).forEach((activeSearch) => {
-//         matchingCards = searchCards(req, matchingCards, activeSearch);
-//     });
-
-//     res.json(matchingCards)
-// });
-
-
-
 app.get('/cards', (req, res) => {
     let matchingCards = cards.cards;
 
     const searchCards = (req, cards, activeSearch) => {
         const searchTerm = req.query[activeSearch];
-        
+
         if (searchTerm) {
             // Filter cards based on the name (case-insensitive)
             matchingCards = matchingCards.filter(card => {
@@ -59,11 +43,11 @@ app.post('/cards/create', (req, res) => {
        // Error Handling added later
         if (err) res.send("error reading file", err);
         try {
-            console.log(req.body);
+            
             let newCard;
             const jsonCards = JSON.parse(data);
             id = req.body.id ? req.body.id : 1;
-
+            
         newCard = { ...req.body, id: id };
         jsonCards.cards.splice(id -1, 0, newCard);
 
