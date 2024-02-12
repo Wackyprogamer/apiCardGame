@@ -20,16 +20,16 @@ Implement a `/getToken` endpoint that:
 Implement a `/cards` endpoint supporting the following functionalities:
 
 - Retrieve all cards with optional query parameters for filtering (8 points). **Done**
-  - Filtering supports equality matches.
+  - Filtering supports equality matches. **Done**
   - Example: `http://localhost:3000/cards?set=Base%20Set&type=Creature&rarity=Common`
 - Create a new card at the `/cards/create` endpoint (8 points).   **Done**
   - Creates a new card using information from the request body.  **Done**
-  - Ensures cardIds are unique. *Not DONE* 
+  - Ensures cardIds are unique. **Done**
 - Update an existing card using the `/cards/:id` (PUT) endpoint (7 points).**Done**
   - Updates a card using information from the request body and the id in the request params.**Done**
-  - Ensures cardIds are unique.*Kidna*
-- Delete an existing card using the `/cards/:id` (DELETE) endpoint (7 points).
-  - Deletes a card using the id in the request params.
+  - Ensures cardIds are unique.**Done**
+- Delete an existing card using the `/cards/:id` (DELETE) endpoint (7 points).**Done**
+  - Deletes a card using the id in the request params.**Done**
   - Create, update, and delete endpoints are protected; accessible only with a valid JWT.
   - All endpoints return either an errorMessage or a successMessage along with the created/updated/deleted object.
 
@@ -37,7 +37,7 @@ Implement a `/cards` endpoint supporting the following functionalities:
 
 Utilize file operations for reading and writing card data to a JSON file:**Done**
 
-- Ensures file operations do not compromise data integrity and correctly persist data.
+- Ensures file operations do not compromise data integrity and correctly persist data. **Done**
 
 ### Authentication Middleware (10 points)
 
@@ -52,7 +52,7 @@ Implement error handling middleware that:
 
 - Returns a 401 status code for invalid tokens.
 - Returns a 500 status code for other errors. **Done**
-- Includes descriptive error messages in all cases.
+- Includes descriptive error messages in all cases. **Done**
 
 ### Additional Features (Optional - up to 10 points)
 

@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const app = express();
 const path = require('path');
-
 const cards = require('./data/cards.json');
 const cardPath = path.join(__dirname, "data/cards.json");
 let id;
@@ -41,25 +40,36 @@ app.get('/cards', (req, res) => {
 app.post('/cards/create', (req, res) => {
     fs.readFile(cardPath, "utf8", (err, data) => {
        // Error Handling added later
-        if (err) res.send("error reading file", err);
+       if (err) {
+        res.status(500).send({message: "Error reading file", error: err});
+       }
         try {
-            
             let newCard;
             const jsonCards = JSON.parse(data);
             id = req.body.id ? req.body.id : 1;
             
+            // Check for duplicated Ids
+            let duplicatedId = jsonCards.cards.find((card) => card.id === id);
+            while (duplicatedId) {
+                id++;
+                duplicatedId = jsonCards.cards.find((card) => card.id === id);
+            }
+
         newCard = { ...req.body, id: id };
         jsonCards.cards.splice(id -1, 0, newCard);
 
         fs.writeFile(cardPath, JSON.stringify(jsonCards, null, 2), (err) => {
-            if (err) console.error("error writing file", err);
+            if (err) {
+                console.error("error writing file", err);
+                return;
+            }
         });
 
-        let succesDeck = `Your Card was added to the deck: ${JSON.stringify(newCard)}`
-        res.send(succesDeck);
+        let successDeck = `Your Card was added to the deck: ${JSON.stringify(newCard)}`
+        res.send(successDeck);
 
         } catch (parseErr) {
-            res.status(404).send("Error parsing JSON Data", parseErr);
+            res.status(404).send({message: "Error parsing JSON Data", error: parseErr});
         }
     })
 });

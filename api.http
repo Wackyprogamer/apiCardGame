@@ -12,7 +12,7 @@ POST http://localhost:3000/cards/create HTTP/1.1
 content-type: application/json
 
 {
-    "id": 156,
+    "id": 157,
     "name": "Sergio Castillo",
     "Cost": 200
 }
@@ -39,7 +39,7 @@ Content-Type: application/json
 # edits cards
 ####
 
-DELETE http://localhost:3000/cards/156
+DELETE http://localhost:3000/cards/159
 
 # deletes cards
 ####
