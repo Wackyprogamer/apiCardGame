@@ -30,8 +30,8 @@ Implement a `/cards` endpoint supporting the following functionalities:
   - Ensures cardIds are unique.**Done**
 - Delete an existing card using the `/cards/:id` (DELETE) endpoint (7 points).**Done**
   - Deletes a card using the id in the request params.**Done**
-  - Create, update, and delete endpoints are protected; accessible only with a valid JWT.
-  - All endpoints return either an errorMessage or a successMessage along with the created/updated/deleted object.
+  - Create, update, and delete endpoints are protected; accessible only with a valid JWT. **Done**
+  - All endpoints return either an errorMessage or a successMessage along with the created/updated/deleted object. **Done**
 
 ### File Operations (10 points)
 
@@ -41,9 +41,9 @@ Utilize file operations for reading and writing card data to a JSON file:**Done*
 
 ### Authentication Middleware (10 points)
 
-Implement middleware to validate incoming JWT tokens for protected routes:
+Implement middleware to validate incoming JWT tokens for protected routes: **Done**
 
-- Respond appropriately to unauthorized requests.
+- Respond appropriately to unauthorized requests. **Done**
 - Store the JWT signing secret in a `.env` file (not included in the Git repo). **Done**
 
 ### Error Handling (10 points)
