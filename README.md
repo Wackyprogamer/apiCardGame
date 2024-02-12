@@ -10,10 +10,10 @@ This project involves building an Express.js API server for a fictional collecti
 
 Implement a `/getToken` endpoint that:
 
-- Accepts a username and password.
-- Validates the credentials against a user JSON file.
-- Returns a JSON Web Token (JWT) upon successful authentication.
-- Returns a 401 status code with an error message if authentication fails.
+- Accepts a username and password. **Done**
+- Validates the credentials against a user JSON file. **Done**
+- Returns a JSON Web Token (JWT) upon successful authentication.**Done**
+- Returns a 401 status code with an error message if authentication fails. **Done**
 
 ### Card Management Endpoints (45 points)
 
@@ -48,9 +48,9 @@ Implement middleware to validate incoming JWT tokens for protected routes:
 
 ### Error Handling (10 points)
 
-Implement error handling middleware that:
+Implement error handling middleware that:**Done**
 
-- Returns a 401 status code for invalid tokens.
+- Returns a 401 status code for invalid tokens. **Done**
 - Returns a 500 status code for other errors. **Done**
 - Includes descriptive error messages in all cases. **Done**
 

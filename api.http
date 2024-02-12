@@ -1,3 +1,14 @@
+POST http://localhost:3000/getToken
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "password"
+}
+
+# this will enter and verify credentials
+###
+
 GET http://localhost:3000/cards
 # gets and filters the card
 ####

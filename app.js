@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
@@ -5,8 +6,33 @@ const app = express();
 const path = require('path');
 const cards = require('./data/cards.json');
 const cardPath = path.join(__dirname, "data/cards.json");
+const userPath = path.join(__dirname, "data/users.json")
 let id;
 app.use(express.json());
+
+
+app.post('/getToken', (req, res) => {
+    const { username, password } = req.body;
+
+    // Read and parse the user.json file
+    fs.readFile(userPath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error reading user file.');
+        }
+
+        const users = JSON.parse(data);
+        const user = users.users.find(u => u.username === username && u.password === password);
+
+        if (!user) {
+            return res.status(401).json({ error: 'Invalid credentials' });
+        }
+        
+        // Generate JWT token
+        const token = jwt.sign({ id: user.id }, process.env.SECRET, { expiresIn: '1h' });
+        
+        res.json({ token });
+    });
+});
 
 
 // Search function & endpoint
@@ -103,6 +129,7 @@ app.put("/cards/:id", (req, res) => {
     }
 });
 
+//Deletes Card via id
 app.delete("/cards/:id", (req, res) => {
     const idCard = Number(req.params.id);
     try {
@@ -131,31 +158,6 @@ app.delete("/cards/:id", (req, res) => {
         res.status(404).send("Error parsing JSON data", parseErr);
     }
 });
-
-// app.post('/getToken', (req, res) => {
-//     const { username, password } = req.body;
-
-//     // Read and parse the user.json file
-//     fs.readFile('./users.json', 'utf8', (err, data) => {
-//         if (err) {
-//             return res.status(500).send('Error reading user file.');
-//         }
-
-//         const users = JSON.parse(data);
-//         const user = users.find(u => u.username === username && u.password === password);
-
-//         if (!user) {
-//             return res.status(401).json({ error: 'Invalid credentials' });
-//         }
-
-//         // Generate JWT token
-//         const token = jwt.sign({ id: user.id }, 'secretKey', { expiresIn: '1h' });
-        
-//         res.json({ token });
-//     });
-// });
-
-
 
 // Start the server
 app.listen(3000, (req, res) => {
