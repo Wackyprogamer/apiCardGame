@@ -6,20 +6,24 @@ Content-Type: application/json
     "password": "password"
 }
 
-# this will enter and verify credentials
+# this will enter and verify credentials & generate a token -- compy and paste token for Authorization below
 ###
 
 GET http://localhost:3000/cards
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDc3MDgxOTIsImV4cCI6MTcwNzcxMTc5Mn0.ozRQqD-63cWF3zyQtcFW6fZHcZyupn9BLsKmzDOGvyw
 # gets and filters the card
+# make sure to readd your new token to due expriation
 ####
 
 
 GET http://localhost:3000/cards?power=3500&cardNumber=7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDc3MDgxOTIsImV4cCI6MTcwNzcxMTc5Mn0.ozRQqD-63cWF3zyQtcFW6fZHcZyupn9BLsKmzDOGvyw
 # gets and filters the card
 ####
 
 
 POST http://localhost:3000/cards/create HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDc3MDgxOTIsImV4cCI6MTcwNzcxMTc5Mn0.ozRQqD-63cWF3zyQtcFW6fZHcZyupn9BLsKmzDOGvyw
 content-type: application/json
 
 {
@@ -31,31 +35,30 @@ content-type: application/json
 # This will create a new card
 ####
 
-POST http://localhost:3000/getToken
-# This will create a new card
-####
-
 PUT http://localhost:3000/cards/:id
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDc3MDgxOTIsImV4cCI6MTcwNzcxMTc5Mn0.ozRQqD-63cWF3zyQtcFW6fZHcZyupn9BLsKmzDOGvyw
 # edits cards
 ####
 
-PUT http://localhost:3000/cards/155 HTTP/1.1
+PUT http://localhost:3000/cards/157 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDc3MDgxOTIsImV4cCI6MTcwNzcxMTc5Mn0.ozRQqD-63cWF3zyQtcFW6fZHcZyupn9BLsKmzDOGvyw
 Content-Type: application/json
 
 {
-    "name": "Sergio Castillo",
+    "name": "Sony Storm",
     "Cost": 200
 }
 
 # edits cards
 ####
 
-DELETE http://localhost:3000/cards/159
-
+DELETE http://localhost:3000/cards/157
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDc3MDgxOTIsImV4cCI6MTcwNzcxMTc5Mn0.ozRQqD-63cWF3zyQtcFW6fZHcZyupn9BLsKmzDOGvyw
 # deletes cards
 ####
 
 
 DELETE http://localhost:3000/cards/:id
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDc3MDgxOTIsImV4cCI6MTcwNzcxMTc5Mn0.ozRQqD-63cWF3zyQtcFW6fZHcZyupn9BLsKmzDOGvyw
 # deletes cards
 ####

@@ -10,6 +10,24 @@ const userPath = path.join(__dirname, "data/users.json")
 let id;
 app.use(express.json());
 
+const authenticateJWT = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+
+    if (authHeader) {
+        const token = authHeader.split(' ')[1];
+
+        jwt.verify(token, process.env.SECRET, (err, user) => {
+            if (err) {
+                return res.sendStatus(403);
+            }
+
+            req.user = user;
+            next();
+        });
+    } else {
+        res.sendStatus(401);
+    }
+};
 
 app.post('/getToken', (req, res) => {
     const { username, password } = req.body;
@@ -26,7 +44,7 @@ app.post('/getToken', (req, res) => {
         if (!user) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
-        
+
         // Generate JWT token
         const token = jwt.sign({ id: user.id }, process.env.SECRET, { expiresIn: '1h' });
         
@@ -36,7 +54,7 @@ app.post('/getToken', (req, res) => {
 
 
 // Search function & endpoint
-app.get('/cards', (req, res) => {
+app.get('/cards', authenticateJWT, (req, res) => {
     let matchingCards = cards.cards;
 
     const searchCards = (req, cards, activeSearch) => {
@@ -63,7 +81,7 @@ app.get('/cards', (req, res) => {
 
 
 //Creating Cards -- Still Need Error Handling & Dups
-app.post('/cards/create', (req, res) => {
+app.post('/cards/create', authenticateJWT, (req, res) => {
     fs.readFile(cardPath, "utf8", (err, data) => {
        // Error Handling added later
        if (err) {
@@ -102,7 +120,7 @@ app.post('/cards/create', (req, res) => {
 
 
 //Edit Card Enpoint -- Edits Card
-app.put("/cards/:id", (req, res) => {
+app.put("/cards/:id", authenticateJWT, (req, res) => {
     const idCard = Number(req.params.id);
     const userChanged = req.body;
     const listedChanges = Object.keys(req.body);
@@ -130,7 +148,7 @@ app.put("/cards/:id", (req, res) => {
 });
 
 //Deletes Card via id
-app.delete("/cards/:id", (req, res) => {
+app.delete("/cards/:id", authenticateJWT, (req, res) => {
     const idCard = Number(req.params.id);
     try {
         fs.readFile(cardPath, "utf-8", (err, data) => {
@@ -158,6 +176,8 @@ app.delete("/cards/:id", (req, res) => {
         res.status(404).send("Error parsing JSON data", parseErr);
     }
 });
+
+
 
 // Start the server
 app.listen(3000, (req, res) => {

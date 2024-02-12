@@ -44,7 +44,7 @@ Utilize file operations for reading and writing card data to a JSON file:**Done*
 Implement middleware to validate incoming JWT tokens for protected routes:
 
 - Respond appropriately to unauthorized requests.
-- Store the JWT signing secret in a `.env` file (not included in the Git repo).
+- Store the JWT signing secret in a `.env` file (not included in the Git repo). **Done**
 
 ### Error Handling (10 points)
 
